@@ -5,6 +5,7 @@ const morgan = require('morgan')
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 // app.disable('etag')
 
+// this is a change
 app.get('/*', (req, res) => {
   res.status(200).send('Hello World!')
 })
