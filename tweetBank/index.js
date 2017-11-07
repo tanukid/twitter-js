@@ -2,8 +2,9 @@ const { cloneDeep, filter } = require('lodash')
 const data = []
 
 module.exports = {
-  add(name, content) {
+  add(name, content, done) {
     data.push({ name, content })
+    if(done) done();
   },
   list() {
     return cloneDeep(data)

@@ -21,5 +21,5 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 const port = 3000
 const server = app.listen(port, () => console.log('listening to ' + port))
-const io = socketio.listen(server);
+const io = socketio.listen(server)
 app.use('/', router(io))
