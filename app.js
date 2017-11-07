@@ -2,6 +2,7 @@ const express = require('express')
 const nunjucks = require('nunjucks')
 const router = require('./routes')
 var bodyParser = require('body-parser')
+var socketio = require('socket.io');
 
 const app = express() // creates an instance of an express application
 nunjucks.configure('views', { noCache: true })
@@ -12,7 +13,13 @@ app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({ extended: false }))
 // apply the routes to our application
-app.use(router)
+//app.use(router)
+
+// or:
+// var router = routes(io);
+// app.use( '/', router );
 
 const port = 3000
-app.listen(port, () => console.log('listening to ' + port))
+const server = app.listen(port, () => console.log('listening to ' + port))
+const io = socketio.listen(server);
+app.use('/', router(io))
